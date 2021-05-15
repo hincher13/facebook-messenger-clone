@@ -5,7 +5,9 @@ import './App.css';
 
 function App() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    {username: 'sonny', text: 'hey guys'}, 
+    {username: 'ray', text: 'whats up'}]);
   const [username, setUsername] = useState('');
 
   useEffect(() => {
@@ -14,11 +16,9 @@ function App() {
 
   const sendMessage = (event) => {
     event.preventDefault();
-    setMessages([...messages, input]);
+    setMessages([...messages, { username: username, text: input }]);
     setInput('');
   }
-
-console.log(username)
 
   return (
     <div className="App">
@@ -34,7 +34,7 @@ console.log(username)
       </form>
       {
         messages.map(message => (
-         <Message text={message}/>
+         <Message username={message.username} text={message.text}/>
         ))
       }
     </div>
