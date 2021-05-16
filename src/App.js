@@ -4,6 +4,7 @@ import Message from './components/Message';
 import './App.css';
 import db from './firebase';
 import firebase from 'firebase';
+import FlipMove from 'react-flip-move';
 
 function App() {
   const [input, setInput] = useState('');
@@ -16,7 +17,7 @@ function App() {
     db.collection('messages')
     .orderBy('timestamp', 'desc')
     .onSnapshot(snapshot => {
-      setMessages(snapshot.docs.map(doc => doc.data()))
+      setMessages(snapshot.docs.map(doc => ({id: doc.id, message: doc.data()})))
     });
   }, [] )
 
@@ -37,9 +38,10 @@ function App() {
 
   return (
     <div className="App">
+      <img src="https://facebookbrand.com/wp-content/uploads/2018/09/Header-e1538151782912.png?w=100&h=100" />
       <h1>Hello Clever Programmers!</h1>
       <h2>Welcome {username}</h2>
-      <form>
+      <form className="app__form">
       <FormControl>
         <InputLabel >Enter a message...</InputLabel>
         <Input value={input} onChange={event => setInput(event.target.value)}/>
@@ -47,11 +49,15 @@ function App() {
     </FormControl>
         
       </form>
-      {
-        messages.map(message => (
-         <Message username={message.username} message={message}/>
-        ))
-      }
+
+      <FlipMove>
+        {
+          messages.map(({id, message}) => (
+          <Message key={id} username={username} message={message}/>
+          ))
+        }
+      </FlipMove>
+
     </div>
   );
 }
