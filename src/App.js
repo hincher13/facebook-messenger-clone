@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FormControl, InputLabel, Input } from '@material-ui/core';
 import Message from './components/Message';
-import './App.css';
 import db from './firebase';
 import firebase from 'firebase';
 import FlipMove from 'react-flip-move';
 import SendIcon from '@material-ui/icons/Send';
-import { IconButton } from '@material-ui/core';
 import styled from 'styled-components';
 
 function App() {

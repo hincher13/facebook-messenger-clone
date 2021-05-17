@@ -1,7 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import '../Message.css';
-import styled from 'styled-components';
 
 const Message = forwardRef(({ message, username }, ref) => {
 	const isUser = username === message.username;
